@@ -7,12 +7,33 @@ class Todo extends React.Component {
       text: props.text
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleClick(event) {
+    this.setState(
+      state => ({
+        done: !state.done
+      }),
+      function(event) {
+        this.handleSubmit(event);
+      }
+    );
+  }
+
+  handleChange(event) {
+    let text = event.target.value;
+
     this.setState(state => ({
-      done: !state.done
+      text: text
     }));
+  }
+
+  handleSubmit(event) {
+    console.log("this is where the submit will happen");
+    // this.setState(state => ({
+    // }));
   }
 
   render() {
@@ -24,7 +45,12 @@ class Todo extends React.Component {
             checked={this.state.done}
             onClick={this.handleClick}
           />
-          <input type="text" value={this.state.text} />
+          <input
+            type="text"
+            value={this.state.text}
+            onChange={this.handleChange}
+            onBlur={this.handleSubmit}
+          />
         </span>
       </div>
     );

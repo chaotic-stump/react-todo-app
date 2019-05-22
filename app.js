@@ -19,6 +19,8 @@ var Todo = function (_React$Component) {
       text: props.text
     };
     _this.handleClick = _this.handleClick.bind(_this);
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
@@ -29,7 +31,27 @@ var Todo = function (_React$Component) {
         return {
           done: !state.done
         };
+      }, function (event) {
+        this.handleSubmit(event);
       });
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      var text = event.target.value;
+
+      this.setState(function (state) {
+        return {
+          text: text
+        };
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      console.log("this is where the submit will happen");
+      // this.setState(state => ({
+      // }));
     }
   }, {
     key: "render",
@@ -45,7 +67,12 @@ var Todo = function (_React$Component) {
             checked: this.state.done,
             onClick: this.handleClick
           }),
-          React.createElement("input", { type: "text", value: this.state.text })
+          React.createElement("input", {
+            type: "text",
+            value: this.state.text,
+            onChange: this.handleChange,
+            onBlur: this.handleSubmit
+          })
         )
       );
     }
