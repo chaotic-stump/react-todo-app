@@ -72,6 +72,7 @@ var Todo = function (_React$Component) {
           React.createElement("input", {
             type: "text",
             value: this.state.text,
+            className: this.state.done ? "done" : "not-done",
             onChange: this.handleChange,
             onBlur: this.handleSubmit
           })
