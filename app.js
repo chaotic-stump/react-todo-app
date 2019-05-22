@@ -19,6 +19,8 @@ var Todo = function (_React$Component) {
     key: "render",
     value: function render() {
       var checked = this.props.done == "true";
+      var text = this.props.text;
+
       return React.createElement(
         "div",
         { className: "todo" },
@@ -26,8 +28,7 @@ var Todo = function (_React$Component) {
           "span",
           null,
           React.createElement("input", { type: "checkbox", checked: checked }),
-          " ",
-          this.props.name
+          React.createElement("input", { type: "text", value: this.props.text })
         )
       );
     }
@@ -36,4 +37,4 @@ var Todo = function (_React$Component) {
   return Todo;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Todo, { name: "one", done: "false" }), document.getElementById("root"));
+ReactDOM.render(React.createElement(Todo, { text: "one", done: "true" }), document.getElementById("root"));
