@@ -1,5 +1,7 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -15,7 +17,7 @@ var Todo = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this, props));
 
     _this.state = {
-      done: _this.props.done == "true" && props.done,
+      done: props.done,
       text: props.text
     };
     _this.handleClick = _this.handleClick.bind(_this);
@@ -81,4 +83,61 @@ var Todo = function (_React$Component) {
   return Todo;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Todo, { text: "one", done: "true" }), document.getElementById("root"));
+var TodoList = function (_React$Component2) {
+  _inherits(TodoList, _React$Component2);
+
+  function TodoList(props) {
+    _classCallCheck(this, TodoList);
+
+    var _this2 = _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).call(this, props));
+
+    _this2.state = {
+      todos: [{
+        _id: "a",
+        text: "Item 1",
+        done: false
+      }, {
+        _id: "b",
+        text: "Item 2",
+        done: false
+      }, {
+        _id: "c",
+        text: "Item 3",
+        done: true
+      }, {
+        _id: "d",
+        text: "Item 4",
+        done: false
+      }]
+    };
+    return _this2;
+  }
+
+  _createClass(TodoList, [{
+    key: "render",
+    value: function render() {
+      var todoList = this.state.todos.map(function (todo) {
+        return React.createElement(Todo, _defineProperty({
+          key: todo._id.toString(),
+          text: todo.text,
+          done: todo.done
+        }, "done", todo.done));
+      });
+
+      return React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(
+          "h1",
+          null,
+          "React Todo App"
+        ),
+        todoList
+      );
+    }
+  }]);
+
+  return TodoList;
+}(React.Component);
+
+ReactDOM.render(React.createElement(TodoList, null), document.getElementById("root"));
